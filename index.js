@@ -4,12 +4,20 @@ alert("Welcome to your Trip Planner, Hildebrando!")
 
 // CASE 1
 
+
+const checkNumber = (num) => {
+    if (0 < num < 4 && !isNaN(Number(num))) {
+        return true
+    } else {
+        return false
+    }
+}
+
 let eat = whilePrompt("Insert the number corresponding your breakfast selection:\n\n" +
     "1. Almojabana (it's been in the stand for a while) with soda: $15000\n" +
     "2. Subway with soda: $23000\n" +
-    "3. Don't eat breakfast yet", (value) => 0 < eat < 4)
+    "3. Don't eat breakfast yet", checkNumber )
 
-console.log(eat == "1")
 if (eat == "1") {
     budget -= 15000
     alert("Hildebrando ate the almojabana with soda; he had to run to the closest bathroom not long after.")
@@ -18,8 +26,6 @@ if (eat == "1") {
     alert("Hildebrando ate the Subway with soda; it was good.")
 } else if (eat == "3") {
     alert("Hildebrando decided to not eat breakfast yet, he'll wait until he arrives in Medellin")
-} else {
-    alert("Please, insert a valid option!")
 }
 
 
@@ -77,11 +83,16 @@ alert(`The decoded password is: ${charCode}`)
 
 
 function whilePrompt(msg, cond) {
-    let theValue = prompt(msg)
-
-    if (cond) {
-        return theValue
-    } else {
-        alert("Please, insert a valid option!")
+    let theValue
+    while (true) {
+        console.log("pgl")
+        theValue = prompt(msg)
+        console.log(0 < theValue < 4 && !isNaN(Number(num)))
+        if (cond(theValue)) {
+            break
+        } else {
+            alert("Please, insert a valid option!")
+        }
     }
+    return theValue
 }
